@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C0115E000000000000000070 /* GrafanaOpenTelemetryIOS in Frameworks */ = {isa = PBXBuildFile; productRef = C0115E000000000000000060 /* GrafanaOpenTelemetryIOS */; };
+		C0115E000000000000000071 /* OpenTelemetryApi in Frameworks */ = {isa = PBXBuildFile; productRef = C0115E000000000000000061 /* OpenTelemetryApi */; };
+		C0115E000000000000000072 /* OpenTelemetryApi in Frameworks */ = {isa = PBXBuildFile; productRef = C0115E000000000000000062 /* OpenTelemetryApi */; };
+		C0115E000000000000000073 /* OpenTelemetrySdk in Frameworks */ = {isa = PBXBuildFile; productRef = C0115E000000000000000063 /* OpenTelemetrySdk */; };
+		C0115E000000000000000074 /* OpenTelemetryProtocolExporterHTTP in Frameworks */ = {isa = PBXBuildFile; productRef = C0115E000000000000000064 /* OpenTelemetryProtocolExporterHTTP */; };
+		C0115E000000000000000075 /* ResourceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = C0115E000000000000000065 /* ResourceExtension */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C0115E000000000000000020 /* ConsumerGrafana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsumerGrafana.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0115E000000000000000021 /* ConsumerUpstream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ConsumerUpstream.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0115E000000000000000022 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C0115E000000000000000010 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Sources/Shared;
+			sourceTree = "<group>";
+		};
+		C0115E000000000000000011 /* Grafana */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Sources/Grafana;
+			sourceTree = "<group>";
+		};
+		C0115E000000000000000012 /* Upstream */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Sources/Upstream;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C0115E000000000000000041 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0115E000000000000000070 /* GrafanaOpenTelemetryIOS in Frameworks */,
+				C0115E000000000000000071 /* OpenTelemetryApi in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0115E000000000000000044 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0115E000000000000000072 /* OpenTelemetryApi in Frameworks */,
+				C0115E000000000000000073 /* OpenTelemetrySdk in Frameworks */,
+				C0115E000000000000000074 /* OpenTelemetryProtocolExporterHTTP in Frameworks */,
+				C0115E000000000000000075 /* ResourceExtension in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C0115E000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				C0115E000000000000000010 /* Shared */,
+				C0115E000000000000000011 /* Grafana */,
+				C0115E000000000000000012 /* Upstream */,
+				C0115E000000000000000022 /* Info.plist */,
+				C0115E000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C0115E000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C0115E000000000000000020 /* ConsumerGrafana.app */,
+				C0115E000000000000000021 /* ConsumerUpstream.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C0115E000000000000000030 /* ConsumerGrafana */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0115E000000000000000081 /* Build configuration list for PBXNativeTarget "ConsumerGrafana" */;
+			buildPhases = (
+				C0115E000000000000000040 /* Sources */,
+				C0115E000000000000000041 /* Frameworks */,
+				C0115E000000000000000042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C0115E000000000000000010 /* Shared */,
+				C0115E000000000000000011 /* Grafana */,
+			);
+			name = ConsumerGrafana;
+			packageProductDependencies = (
+				C0115E000000000000000060 /* GrafanaOpenTelemetryIOS */,
+				C0115E000000000000000061 /* OpenTelemetryApi */,
+			);
+			productName = ConsumerGrafana;
+			productReference = C0115E000000000000000020 /* ConsumerGrafana.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C0115E000000000000000031 /* ConsumerUpstream */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0115E000000000000000082 /* Build configuration list for PBXNativeTarget "ConsumerUpstream" */;
+			buildPhases = (
+				C0115E000000000000000043 /* Sources */,
+				C0115E000000000000000044 /* Frameworks */,
+				C0115E000000000000000045 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C0115E000000000000000010 /* Shared */,
+				C0115E000000000000000012 /* Upstream */,
+			);
+			name = ConsumerUpstream;
+			packageProductDependencies = (
+				C0115E000000000000000062 /* OpenTelemetryApi */,
+				C0115E000000000000000063 /* OpenTelemetrySdk */,
+				C0115E000000000000000064 /* OpenTelemetryProtocolExporterHTTP */,
+				C0115E000000000000000065 /* ResourceExtension */,
+			);
+			productName = ConsumerUpstream;
+			productReference = C0115E000000000000000021 /* ConsumerUpstream.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C0115E000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					C0115E000000000000000030 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+					C0115E000000000000000031 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+				};
+			};
+			buildConfigurationList = C0115E000000000000000080 /* Build configuration list for PBXProject "PackageConsumer" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C0115E000000000000000002;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C0115E000000000000000050 /* XCRemoteSwiftPackageReference "grafana-opentelemetry-ios" */,
+				C0115E000000000000000051 /* XCRemoteSwiftPackageReference "opentelemetry-swift" */,
+				C0115E000000000000000052 /* XCRemoteSwiftPackageReference "opentelemetry-swift-core" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C0115E000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C0115E000000000000000030 /* ConsumerGrafana */,
+				C0115E000000000000000031 /* ConsumerUpstream */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C0115E000000000000000042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0115E000000000000000045 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C0115E000000000000000040 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0115E000000000000000043 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C0115E000000000000000090 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C0115E000000000000000091 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C0115E000000000000000092 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Package consumer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grafana.opentelemetry.consumer.grafana;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C0115E000000000000000093 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Package consumer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grafana.opentelemetry.consumer.grafana;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		C0115E000000000000000094 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Package consumer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grafana.opentelemetry.consumer.upstream;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C0115E000000000000000095 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Package consumer";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grafana.opentelemetry.consumer.upstream;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C0115E000000000000000080 /* Build configuration list for PBXProject "PackageConsumer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0115E000000000000000090 /* Debug */,
+				C0115E000000000000000091 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0115E000000000000000081 /* Build configuration list for PBXNativeTarget "ConsumerGrafana" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0115E000000000000000092 /* Debug */,
+				C0115E000000000000000093 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0115E000000000000000082 /* Build configuration list for PBXNativeTarget "ConsumerUpstream" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0115E000000000000000094 /* Debug */,
+				C0115E000000000000000095 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C0115E000000000000000050 /* XCRemoteSwiftPackageReference "grafana-opentelemetry-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/grafana/grafana-opentelemetry-ios.git";
+			requirement = {
+				kind = exactVersion;
+				version = "0.0.0-dev";
+			};
+		};
+		C0115E000000000000000051 /* XCRemoteSwiftPackageReference "opentelemetry-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/open-telemetry/opentelemetry-swift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.6.0;
+			};
+		};
+		C0115E000000000000000052 /* XCRemoteSwiftPackageReference "opentelemetry-swift-core" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/open-telemetry/opentelemetry-swift-core.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 2.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C0115E000000000000000060 /* GrafanaOpenTelemetryIOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0115E000000000000000050 /* XCRemoteSwiftPackageReference "grafana-opentelemetry-ios" */;
+			productName = GrafanaOpenTelemetryIOS;
+		};
+		C0115E000000000000000061 /* OpenTelemetryApi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0115E000000000000000052 /* XCRemoteSwiftPackageReference "opentelemetry-swift-core" */;
+			productName = OpenTelemetryApi;
+		};
+		C0115E000000000000000062 /* OpenTelemetryApi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0115E000000000000000052 /* XCRemoteSwiftPackageReference "opentelemetry-swift-core" */;
+			productName = OpenTelemetryApi;
+		};
+		C0115E000000000000000063 /* OpenTelemetrySdk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0115E000000000000000052 /* XCRemoteSwiftPackageReference "opentelemetry-swift-core" */;
+			productName = OpenTelemetrySdk;
+		};
+		C0115E000000000000000064 /* OpenTelemetryProtocolExporterHTTP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0115E000000000000000051 /* XCRemoteSwiftPackageReference "opentelemetry-swift" */;
+			productName = OpenTelemetryProtocolExporterHTTP;
+		};
+		C0115E000000000000000065 /* ResourceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0115E000000000000000051 /* XCRemoteSwiftPackageReference "opentelemetry-swift" */;
+			productName = ResourceExtension;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = C0115E000000000000000001 /* Project object */;
+}

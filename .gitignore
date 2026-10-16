@@ -1,0 +1,8 @@
+.build/
+.swiftpm/
+build/
+DerivedData/
+xcuserdata/
+.DS_Store
+# Written by scripts/publish-local.sh, with paths for this machine.
+consumer/PackageConsumer.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/

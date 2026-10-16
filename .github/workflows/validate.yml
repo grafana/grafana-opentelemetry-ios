@@ -1,0 +1,79 @@
+name: Validate iOS package
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Xcode ${{ matrix.xcode }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The toolchain the package was validated with in mobile-o11y-demo.
+          - runner: macos-26
+            xcode: '26.6'
+            os: '26.5'
+            check-api: false
+          # The compiler prints the API snapshot, so only the Xcode version that wrote it checks it.
+          - runner: xcode-27
+            xcode: '27.0'
+            os: '27.0'
+            check-api: true
+    env:
+      XCODE: ${{ matrix.xcode }}
+      SIMULATOR_OS: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Select Xcode
+        run: |
+          sudo xcode-select --switch "/Applications/Xcode_${XCODE}.app"
+          xcodebuild -version
+      - name: Test on the macOS host
+        run: swift test
+      # One simulator for the unit tests and the smoke test. A second boot on the same runner made
+      # simctl time out on iOS 27.0.
+      - name: Create and boot a new simulator
+        id: simulator
+        run: |
+          runtime="com.apple.CoreSimulator.SimRuntime.iOS-${SIMULATOR_OS//./-}"
+          udid="$(xcrun simctl create package-validation "iPhone 17" "$runtime")"
+          xcrun simctl bootstatus "$udid" -b
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+      - name: Test on the iOS Simulator
+        env:
+          SIMULATOR_UDID: ${{ steps.simulator.outputs.udid }}
+        run: >-
+          xcodebuild test
+          -scheme grafana-opentelemetry-ios
+          -destination "platform=iOS Simulator,id=${SIMULATOR_UDID}"
+          -derivedDataPath .build/xcodebuild-dd
+      - name: Check public API
+        if: matrix.check-api
+        run: scripts/api.sh check
+      - name: Publish to a local test repository
+        run: scripts/publish-local.sh
+      - name: Build independent consumers with and without the Grafana layer
+        run: consumer/build.sh
+      - name: Run the consumer smoke test
+        env:
+          SIMULATOR_UDID: ${{ steps.simulator.outputs.udid }}
+        run: |
+          python3 -m venv build/smoke-venv
+          build/smoke-venv/bin/pip install --quiet -r consumer/smoke-requirements.txt
+          build/smoke-venv/bin/python consumer/smoke_test.py --udid "$SIMULATOR_UDID"
+      - name: Ensure validation did not rewrite tracked files
+        run: git diff --exit-code
