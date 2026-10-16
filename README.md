@@ -42,6 +42,10 @@ let tracer = runtime.openTelemetry.tracerProvider.get(
 Initialize once, on the main thread, early in app startup. The first initialization owns the
 process-wide runtime. No meter provider is registered; this package routes logs and traces to the
 configured endpoint. Automatic `URLSession` tracing sends trace context only to `firstPartyHosts`.
+By default, a redirect to another host keeps that context. `automaticRedirectProtection` filters
+redirects only for `async`/`await` requests on sessions without a delegate. Completion-handler
+requests and sessions with a delegate need `redirectGuard`. See
+[redirects](docs/package.md#redirects-are-outside-the-host-list).
 
 ## Build and Test
 

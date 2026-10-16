@@ -27,7 +27,7 @@ def attributes(values):
 def booted_simulator(udid):
     devices = json.loads(subprocess.run(
         ["xcrun", "simctl", "list", "devices", "--json"],
-        check=True, capture_output=True, text=True, timeout=60,
+        check=True, capture_output=True, text=True, timeout=300,
     ).stdout)["devices"]
     return any(
         device["udid"] == udid and device["state"] == "Booted"
@@ -77,7 +77,7 @@ def run(udid):
 
     def simctl(*args, check=True):
         return subprocess.run(
-            ["xcrun", "simctl", *args], check=check, capture_output=True, text=True, timeout=120
+            ["xcrun", "simctl", *args], check=check, capture_output=True, text=True, timeout=300
         ).stdout
 
     application = web.Application(client_max_size=10 * 1024 * 1024)

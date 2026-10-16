@@ -35,14 +35,13 @@ done
 # package that is still linked.
 linked_package_objects() {
   local intermediates="$build/DerivedData/Build/Intermediates.noindex/PackageConsumer.build"
-  local lists
-  lists="$(find "$intermediates/$2-iphonesimulator/$1.build" -name "$1.LinkFileList")"
-  if [[ -z "$lists" ]]; then
+  local inputs
+  inputs="$(find "$intermediates/$2-iphonesimulator/$1.build" -name "$1.LinkFileList" -exec cat {} +)"
+  if [[ -z "$inputs" ]]; then
     echo "No link inputs found for $1 ($2)" >&2
     exit 1
   fi
-  # shellcheck disable=SC2086 # One path per line, without spaces.
-  cat $lists | grep -c "/GrafanaOpenTelemetryIOS\.o$" || true
+  grep -c "/GrafanaOpenTelemetryIOS\.o$" <<<"$inputs" || true
 }
 
 for configuration in Debug Release; do

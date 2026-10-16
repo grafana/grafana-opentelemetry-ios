@@ -44,11 +44,22 @@ jobs:
           xcodebuild -version
       - name: Test on the macOS host
         run: swift test
+      # One simulator for the unit tests and the smoke test. A second boot on the same runner made
+      # simctl time out on iOS 27.0.
+      - name: Create and boot a new simulator
+        id: simulator
+        run: |
+          runtime="com.apple.CoreSimulator.SimRuntime.iOS-${SIMULATOR_OS//./-}"
+          udid="$(xcrun simctl create package-validation "iPhone 17" "$runtime")"
+          xcrun simctl bootstatus "$udid" -b
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
       - name: Test on the iOS Simulator
+        env:
+          SIMULATOR_UDID: ${{ steps.simulator.outputs.udid }}
         run: >-
           xcodebuild test
           -scheme grafana-opentelemetry-ios
-          -destination "platform=iOS Simulator,name=iPhone 17,OS=${SIMULATOR_OS}"
+          -destination "platform=iOS Simulator,id=${SIMULATOR_UDID}"
           -derivedDataPath .build/xcodebuild-dd
       - name: Check public API
         if: matrix.check-api
@@ -57,13 +68,12 @@ jobs:
         run: scripts/publish-local.sh
       - name: Build independent consumers with and without the Grafana layer
         run: consumer/build.sh
-      - name: Run the consumer smoke test on a new simulator
+      - name: Run the consumer smoke test
+        env:
+          SIMULATOR_UDID: ${{ steps.simulator.outputs.udid }}
         run: |
           python3 -m venv build/smoke-venv
           build/smoke-venv/bin/pip install --quiet -r consumer/smoke-requirements.txt
-          runtime="com.apple.CoreSimulator.SimRuntime.iOS-${SIMULATOR_OS//./-}"
-          udid="$(xcrun simctl create package-consumer-smoke "iPhone 17" "$runtime")"
-          xcrun simctl bootstatus "$udid" -b
-          build/smoke-venv/bin/python consumer/smoke_test.py --udid "$udid"
+          build/smoke-venv/bin/python consumer/smoke_test.py --udid "$SIMULATOR_UDID"
       - name: Ensure validation did not rewrite tracked files
         run: git diff --exit-code

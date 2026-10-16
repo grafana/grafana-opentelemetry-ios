@@ -20,7 +20,9 @@ Local validation on October 14, 2026. This is not release approval or Grafana Cl
 `fa6ddbb869696b3a62413dd3889ac7944018724d` byte for byte. That revision includes every merged change to
 the package after #114: #117 (README alignment) and #133 (`opentelemetry-swift` 2.6.0). No SDK
 behavior was changed. The package README moved to `docs/package.md`. Its edits are for the new
-repository only: the introduction, the verified toolchains, the test commands and the links.
+repository: the introduction, the verified toolchains, the test commands and the links. It also
+narrows the stated coverage of `automaticRedirectProtection`; see
+[Redirect protection](#redirect-protection).
 
 ### Library tests
 
@@ -103,6 +105,24 @@ Two mutated copies of the harness confirmed that these checks can fail. Expectin
 `url.full` failed and printed the recorded attributes. Requiring an automatic HTTP span from the
 upstream target failed with missing telemetry, because that target has no `URLSession`
 instrumentation. Both simulators were deleted after testing.
+
+### Redirect protection
+
+A probe on the macOS host sent requests to a first-party host that redirects to a host outside
+`firstPartyHosts`. The first hop carried `traceparent` in every case.
+
+| Request | Redirected request has `traceparent` |
+| --- | --- |
+| `async`/`await`, `automaticRedirectProtection` | no |
+| Completion handler resumed from a dispatch queue, `automaticRedirectProtection` | yes |
+| Completion handler resumed from a Swift task, `automaticRedirectProtection` | yes |
+| Completion handler, `redirectGuard` as the task delegate | no |
+| Completion handler, `redirectGuard` as the session delegate | no |
+
+Upstream starts the span for a completion-handler task when the task is created. Its `resume`
+swizzle then returns before it assigns a delegate, so the flag's redirect callback is not called.
+The doc comments in `GrafanaOtel.swift` and `GrafanaOtelAutomaticRedirectProtection.swift` still
+state the wider coverage. They are unchanged, so that the source stays identical to the spike.
 
 ### Workflow
 

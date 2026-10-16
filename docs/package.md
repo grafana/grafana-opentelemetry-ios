@@ -267,8 +267,8 @@ is nothing here for the package to configure.
 There are two ways to close it, and **neither is on by default** — one needs a line of setup, the
 other needs a delegate installed.
 
-**Most apps want the flag.** It filters redirects on every task that has neither a task delegate
-nor a session delegate, which is what `URLSession.shared` with `async`/`await` produces:
+**The flag covers `async`/`await` requests.** It filters redirects on `async`/`await` tasks that
+have neither a task delegate nor a session delegate, which is what `URLSession.shared` produces:
 
 ```swift
 GrafanaOtelExperimentalOptions(automaticRedirectProtection: true)
@@ -281,8 +281,14 @@ skipped wherever an implementation already exists, so an upstream release that s
 redirects keeps ownership, and a rename is reported through `diagnosticsHandler`. The QuickPizza
 demo uses this.
 
+The flag does not cover completion-handler requests, such as
+`URLSession.shared.dataTask(with:completionHandler:)`. Upstream starts their span when the task is
+created, so its `resume` swizzle returns before it assigns a delegate. A redirect to a host outside
+the list keeps `traceparent`, whether the task is resumed from a dispatch queue or a Swift task.
+
 **`GrafanaOtelRuntime.redirectGuard` is the delegate to install when the flag cannot reach you** —
-a session of your own with a delegate, or iOS 13 and 14. As a session delegate:
+completion-handler requests, a session of your own with a delegate, or iOS 13 and 14. As a session
+delegate:
 
 ```swift
 URLSession(configuration: .default, delegate: runtime.redirectGuard, delegateQueue: nil)
@@ -306,7 +312,8 @@ context and the trace stays connected.
 
 | | `automaticRedirectProtection` | `redirectGuard` |
 | --- | --- | --- |
-| Delegate-less sessions | covered | covered |
+| Delegate-less sessions, `async`/`await` | covered | covered |
+| Delegate-less sessions, completion handler | not covered | covered |
 | Sessions with a delegate of your own | not covered | covered |
 | iOS 15 and later | covered | covered, per task or per session |
 | iOS 13 and 14 | not covered — upstream installs no delegate there | covered as a *session* delegate only; `URLSessionTask.delegate` is iOS 15+ |
@@ -353,7 +360,8 @@ These are properties of the pinned upstream release, not of this package's confi
   process. That is why the package installs it and exposes `customizeURLSession` instead of letting
   the app construct a second instance, which would chain swizzles and double-instrument.
 - **Redirects are outside the injection policy** until you opt into
-  `automaticRedirectProtection` or install `GrafanaOtelRuntime.redirectGuard`. There is no redirect
+  `automaticRedirectProtection` or install `GrafanaOtelRuntime.redirectGuard`. The flag covers
+  `async`/`await` requests only; completion-handler requests need the guard. There is no redirect
   callback upstream, so nothing the package *configures* can see the destination — the flag has to
   add one to upstream's internal delegate classes instead. One consequence of the guard is worth
   knowing before you install it:
